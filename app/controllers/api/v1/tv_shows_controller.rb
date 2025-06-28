@@ -14,8 +14,8 @@ class Api::V1::TvShowsController < ApplicationController
     @shows = @shows.page(@page).per(@per_page)
 
     # Add cache headers for deterministic responses
-    response.headers['Cache-Control'] = 'public, max-age=300' # 5 minutes cache
-    response.headers['ETag'] = generate_etag(@shows)
+    response.headers["Cache-Control"] = "public, max-age=300" # 5 minutes cache
+    response.headers["ETag"] = generate_etag(@shows)
 
     render json: {
       data: @shows.map { |show| show_serializer(show) },
@@ -38,27 +38,27 @@ class Api::V1::TvShowsController < ApplicationController
 
   def show
     @show = Show.includes(:network, :genres, :episodes).find(params[:id])
-    
+
     # Add cache headers
-    response.headers['Cache-Control'] = 'public, max-age=300'
-    response.headers['ETag'] = generate_etag(@show)
-    
+    response.headers["Cache-Control"] = "public, max-age=300"
+    response.headers["ETag"] = generate_etag(@show)
+
     render json: { data: show_serializer(@show) }
   rescue ActiveRecord::RecordNotFound
-    render json: { error: 'Show not found' }, status: :not_found
+    render json: { error: "Show not found" }, status: :not_found
   end
 
   private
 
   def set_pagination_params
     @page = (params[:page] || 1).to_i
-    @per_page = [(params[:per_page] || 20).to_i, 100].min # Cap at 100 per page
+    @per_page = [ (params[:per_page] || 20).to_i, 100 ].min # Cap at 100 per page
   end
 
   def date_range
     date_from = params[:date_from] ? Date.parse(params[:date_from]) : Date.today
     date_to = params[:date_to] ? Date.parse(params[:date_to]) : (Date.today + 90.days)
-    
+
     date_from..date_to
   rescue Date::Error
     # Default to next 90 days if invalid date format
@@ -68,9 +68,9 @@ class Api::V1::TvShowsController < ApplicationController
   def apply_filters(shows)
     shows = shows.joins(network: :country).where(countries: { code: params[:country] }) if params[:country].present?
     shows = shows.joins(:network).where(networks: { name: params[:distributor] }) if params[:distributor].present?
-    shows = shows.where('shows.rating >= ?', params[:rating]) if params[:rating].present?
+    shows = shows.where("shows.rating >= ?", params[:rating]) if params[:rating].present?
     shows = shows.joins(:genres).where(genres: { name: params[:genre] }) if params[:genre].present?
-    
+
     shows
   end
 
@@ -125,4 +125,4 @@ class Api::V1::TvShowsController < ApplicationController
       updated_at: show.updated_at
     }
   end
-end 
+end

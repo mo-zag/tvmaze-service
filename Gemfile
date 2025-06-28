@@ -28,13 +28,13 @@ gem "bootsnap", require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 gem "rack-cors"
-gem 'faraday'
+gem "faraday"
 
 # Load environment variables from .env file
-gem 'dotenv-rails', groups: [:development, :test]
+gem "dotenv-rails", groups: [ :development, :test ]
 
 # Pagination
-gem 'kaminari'
+gem "kaminari"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -52,14 +52,12 @@ group :development, :test do
   # Faker for generating fake data in tests
   gem "faker"
   # mocking api endpoints
-  gem 'webmock'
+  gem "webmock"
   # mocking modals
-  gem 'factory_bot_rails' 
+  gem "factory_bot_rails"
 end
 
 group :development do
   # Rubocop for linting
   gem "rubocop", require: false
 end
-
-

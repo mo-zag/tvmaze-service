@@ -16,10 +16,10 @@ class CreateShows < ActiveRecord::Migration[7.2]
       t.decimal :rating, precision: 3, scale: 1
       t.references :network, null: true, foreign_key: true
       t.bigint :tvmaze_updated_at
-      
+
       t.timestamps
     end
-    
+
     add_index :shows, :tvmaze_id, unique: true
     add_index :shows, :name
     add_index :shows, :status
@@ -27,4 +27,4 @@ class CreateShows < ActiveRecord::Migration[7.2]
     add_index :shows, :rating
     add_index :shows, :tvmaze_updated_at
   end
-end 
+end

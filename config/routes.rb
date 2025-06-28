@@ -8,14 +8,14 @@ Rails.application.routes.draw do
   # API Routes
   namespace :api do
     namespace :v1 do
-      resources :tv_shows, only: [:index, :show]
-      
+      resources :tv_shows, only: [ :index, :show ]
+
       # Analytics endpoints
-      get 'analytics/shows_with_episode_stats', to: 'analytics#shows_with_episode_stats'
-      get 'analytics/top_rated_by_genre', to: 'analytics#top_rated_by_genre'
-      get 'analytics/network_performance', to: 'analytics#network_performance'
-      get 'analytics/monthly_trends', to: 'analytics#monthly_trends'
-      get 'analytics/country_distribution', to: 'analytics#country_distribution'
+      get "analytics/shows_with_episode_stats", to: "analytics#shows_with_episode_stats"
+      get "analytics/top_rated_by_genre", to: "analytics#top_rated_by_genre"
+      get "analytics/network_performance", to: "analytics#network_performance"
+      get "analytics/monthly_trends", to: "analytics#monthly_trends"
+      get "analytics/country_distribution", to: "analytics#country_distribution"
     end
   end
 
