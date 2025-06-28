@@ -47,7 +47,7 @@ RSpec.describe TvmazeIngestor do
                 "timezone" => "UTC"
               }
             },
-            "genres" => ["Sci-Fi", "Thriller"]
+            "genres" => [ "Sci-Fi", "Thriller" ]
           }
         }
       }

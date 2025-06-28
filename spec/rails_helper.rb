@@ -69,4 +69,13 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # FactoryBot configuration
+  config.include FactoryBot::Syntax::Methods
+
+  # Set up environment variables for testing
+  config.before(:each) do
+    ENV['API_USERNAME'] = 'admin'
+    ENV['API_PASSWORD'] = 'password123'
+  end
 end
